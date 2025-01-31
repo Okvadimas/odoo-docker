@@ -1,0 +1,62 @@
+version: '3'
+services:
+  odoo-14:
+    container_name: odoo-14
+    image: odoo:14.0
+    env_file: .env
+    depends_on:
+      - postgres
+    ports:
+      - "127.0.0.1:8069:8069"
+    volumes:
+      - data-14:/var/lib/odoo
+    environment:
+      - HOST=postgres
+      - USER=odoo
+      - PASSWORD=12345
+      - PGDATABASE=odoo14
+
+  odoo-15:
+    container_name: odoo-15
+    image: odoo:15.0
+    env_file: .env
+    depends_on:
+      - postgres
+    ports:
+      - "127.0.0.1:8070:8069"
+    volumes:
+      - data-15:/var/lib/odoo
+    environment:
+      - HOST=postgres
+      - USER=odoo
+      - PASSWORD=12345
+      - PGDATABASE=odoo15
+
+  odoo-18:
+    container_name: odoo-18
+    image: odoo:18.0
+    env_file: .env
+    depends_on:
+      - postgres
+    ports:
+      - "127.0.0.1:8071:8069"
+    volumes:
+      - data-18:/var/lib/odoo
+    environment:
+      - HOST=postgres
+      - USER=odoo
+      - PASSWORD=12345
+      - PGDATABASE=odoo18
+
+  postgres:
+    container_name: postgres-13
+    image: postgres:13
+    env_file: .env
+    volumes:
+      - db:/var/lib/postgresql/data
+
+volumes:
+  data-14:
+  data-15:
+  data-18:
+  db:
